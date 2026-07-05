@@ -70,61 +70,43 @@ fun DatePickerSelect(
       .height(60.dp),
     colors = OutlinedTextFieldDefaults.colors()
   )
-
   if (showDatePicker) {
-
     DatePickerDialog(
       onDismissRequest = {
         showDatePicker = false
       },
       confirmButton = {
-
         TextButton(
           onClick = {
-
             datePickerState.selectedDateMillis?.let {
-
               val formatter = SimpleDateFormat(
                 "dd/MM/yyyy",
                 Locale("pt", "BR")
               )
-
               onDateSelected(
                 formatter.format(Date(it))
               )
             }
-
             showDatePicker = false
           }
         ) {
-
           Text("OK")
-
         }
-
       },
       dismissButton = {
-
         TextButton(
           onClick = {
             showDatePicker = false
           }
         ) {
-
           Text("Cancelar")
-
         }
-
       }
-
     ) {
-
       DatePicker(
         state = datePickerState
       )
-
     }
-
   }
 
 }
