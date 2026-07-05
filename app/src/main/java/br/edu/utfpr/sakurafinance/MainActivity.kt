@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.edu.utfpr.sakurafinance.ui.theme.SakuraFinanceTheme
-import br.edu.utfpr.sakurafinance.view.transaction.AddTransactionScreen
+import br.edu.utfpr.sakurafinance.view.screens.AddTransactionScreen
 import br.edu.utfpr.sakurafinance.view.screens.HistoryScreen
 import br.edu.utfpr.sakurafinance.view.screens.HomeScreen
 

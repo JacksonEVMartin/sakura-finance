@@ -1,4 +1,4 @@
-package br.edu.utfpr.sakurafinance.view.transaction
+package br.edu.utfpr.sakurafinance.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.edu.utfpr.sakurafinance.model.Transaction
-import br.edu.utfpr.sakurafinance.view.transaction.components.TransactionItem
+import br.edu.utfpr.sakurafinance.view.components.TransactionItem
 
 @Composable
 fun AddTransactionScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier) {

@@ -1,4 +1,4 @@
-package br.edu.utfpr.sakurafinance.view.transaction.components
+package br.edu.utfpr.sakurafinance.view.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
