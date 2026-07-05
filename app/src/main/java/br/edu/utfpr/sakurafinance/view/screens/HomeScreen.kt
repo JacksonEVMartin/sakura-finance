@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -20,11 +21,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import br.edu.utfpr.sakurafinance.view.components.DatePickerSelect
 import br.edu.utfpr.sakurafinance.view.components.TransactionTypeSelector
+import br.edu.utfpr.sakurafinance.viewModel.TransactionViewModel
 
 
 @Composable
 fun HomeScreen(
-  onNavigateToHistoryScreen: () -> Unit,
+  viewModel: TransactionViewModel,
   onNavigateToAddTransactionScreen: () -> Unit,
   modifier: Modifier = Modifier
 ) {
@@ -70,6 +72,7 @@ fun HomeScreen(
     Card(
       modifier = modifier
         .fillMaxWidth()
+        .padding(bottom = 24.dp)
     ) {
       Column(modifier = modifier.padding(16.dp)) {
         TransactionTypeSelector(
@@ -123,18 +126,45 @@ fun HomeScreen(
             }
           )
         }
+        Button(
+          modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+          shape = RoundedCornerShape(12.dp),
+          onClick = {
+            val value = amount.toDoubleOrNull()
+
+            if (
+              description.isNotBlank() &&
+              date.isNotBlank() &&
+              value != null
+            ) {
+              viewModel.saveTransaction(
+                description = description,
+                value = value,
+                date = date,
+                type = selectedType
+              )
+
+              amount = ""
+              description = ""
+              date = ""
+              selectedType = "Receita"
+            }
+          },
+        ) {
+          Text("Salvar Lançamento")
+        }
       }
+    }
+
+    Button(
+      modifier = modifier
+        .fillMaxWidth(),
+      shape = RoundedCornerShape(12.dp),
+      onClick = onNavigateToAddTransactionScreen
+    ) {
+      Text("Ver Extrato")
     }
   }
 }
-
-//Button(onNavigateToHistoryScreen) {
-//  Text(
-//    text = "HistoryScreen"
-//  )
-//}
-//Button(onNavigateToAddTransactionScreen) {
-//  Text(
-//    text = "AddTransactionScreen"
-//  )
-//}

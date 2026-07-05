@@ -15,38 +15,39 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.edu.utfpr.sakurafinance.model.Transaction
 import br.edu.utfpr.sakurafinance.view.components.TransactionItem
+import br.edu.utfpr.sakurafinance.viewModel.TransactionViewModel
+import kotlin.collections.emptyList
 
 @Composable
-fun AddTransactionScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier) {
-  val transactions = listOf(
-    Transaction("Salário", 4500.00, "Crédito"),
-    Transaction("Freelance", 850.00, "Crédito"),
-    Transaction("Venda de Notebook", 2200.00, "Crédito"),
-    Transaction("Dividendos", 180.50, "Crédito"),
-
-    Transaction("Aluguel", 1200.00, "Débito"),
-    Transaction("Supermercado", 385.70, "Débito"),
-    Transaction("Conta de Luz", 145.90, "Débito"),
-    Transaction("Internet", 99.90, "Débito"),
-    Transaction("Gasolina", 250.00, "Débito"),
-    Transaction("Academia", 89.90, "Débito"),
-    Transaction("Cinema", 72.00, "Débito"),
-    Transaction("Restaurante", 138.50, "Débito"),
-    Transaction("Spotify", 21.90, "Débito"),
-    Transaction("Farmácia", 64.35, "Débito")
+fun AddTransactionScreen(
+  viewModel: TransactionViewModel,
+  onBackClick: () -> Unit,
+  modifier: Modifier = Modifier
+) {
+  val transactions by viewModel.transactions.collectAsState(
+    initial = emptyList()
   )
 
-  val totalCredit = transactions.filter { it.type == "Crédito" }.sumOf { it.value }
+  val totalCredit =
+    transactions
+      .filter { it.type == "Receita" }
+      .sumOf { it.value }
 
-  val totalDebit = transactions.filter { it.type == "Débito" }.sumOf { it.value }
+  val totalDebit =
+    transactions
+      .filter { it.type == "Despesa" }
+      .sumOf { it.value }
+
+  val balance = totalCredit - totalDebit
 
   Column(modifier = modifier.padding(16.dp)) {
-
     Card(
       modifier = modifier
         .fillMaxWidth()

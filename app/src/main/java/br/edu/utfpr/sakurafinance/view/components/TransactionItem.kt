@@ -10,10 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import br.edu.utfpr.sakurafinance.data.TransactionEntity
 import br.edu.utfpr.sakurafinance.model.Transaction
 
 @Composable
-fun TransactionItem(transaction: Transaction, modifier: Modifier = Modifier) {
+fun TransactionItem(
+  transaction: TransactionEntity,
+  modifier: Modifier = Modifier
+) {
   Card(
     modifier = modifier
       .fillMaxWidth()
