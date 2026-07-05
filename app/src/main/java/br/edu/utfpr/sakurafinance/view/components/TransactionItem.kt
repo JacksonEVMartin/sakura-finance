@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.edu.utfpr.sakurafinance.data.TransactionEntity
-import br.edu.utfpr.sakurafinance.model.Transaction
 
 @Composable
 fun TransactionItem(
@@ -40,6 +39,7 @@ fun TransactionItem(
           .weight(1F),
         horizontalAlignment = Alignment.End
       ) {
+        Text(text = transaction.date)
         Text(text = "R$ %.2f".format(transaction.value))
       }
     }
